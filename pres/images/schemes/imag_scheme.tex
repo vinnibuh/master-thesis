@@ -1,0 +1,160 @@
+\definecolor{myblue}{rgb}{0.29,0.5647,0.8862}
+\definecolor{myred}{rgb}{0.8776,0.0084,0.1139}
+\definecolor{myyellow}{rgb}{0.9607,0.6509,0.1372}
+\definecolor{myygreen}{rgb}{0.4941,0.8274,0.1294}
+\tikzset{
+  font={\fontsize{14pt}{12}\selectfont}}
+  
+\tikzset{
+state/.style={
+  circle,
+  line width=3pt,
+  text width=2em,
+  align=center,
+  fill=myygreen,
+  draw=white,
+  }
+}
+
+\tikzset{
+trap/.style={
+  trapezium,
+  trapezium stretches=true, 
+  minimum width=1.2cm, 
+  trapezium angle=75, 
+  minimum height=0.8cm,
+  line width=3pt,
+  fill={rgb:myblue,},
+  draw=white,
+  }
+}
+
+\tikzset{
+imagline/.style={
+  line width=3pt,
+  }
+}
+\tikzset{
+imagsnake/.style={
+  decoration={snake, pre length=0.01mm, segment length=2mm, amplitude=0.3mm, post length=3mm},
+  decorate
+  }
+}
+
+\begin{tikzpicture}
+    % middle part
+    \node[state, minimum size=1cm, visible on=<2->] (st) {};
+    \node[trap, below left=0.6cm and 0.1cm of st, visible on=<2->] (tr1) {};
+    \node[trap, below right=0.6cm and 0.1cm of st, visible on=<2->] (tr2) {};
+    \node[above left=0.4cm and 0.3cm of st, visible on=<2->] (at) {$a_1$};
+    \node[above=0.5cm of st, visible on=<2->] (rt) {$\widehat{r_1}$};
+    
+    \node[below=-0.15cm of tr1, visible on=<2->] (o1_wm) {\includegraphics[width=1.1cm]{images/utils/o1_wm_tr.png}};
+    \node[below=-0.15cm of tr2, visible on=<2->] (o2_wm) {\includegraphics[width=1.1cm]{images/utils/o2_wm_tr.png}};
+    \node[below=-0.05cm of o1_wm, visible on=<2->] (o1) {$o_1$};
+    \node[below=-0.15cm of o2_wm, visible on=<2->] (o2) {$\widehat{o_1}$};
+    
+    \node[state, minimum size=1cm, right=1.5cm of st, visible on=<2->] (st1) {};
+    \node[above left=0.4cm and 0.3cm of st1, visible on=<2->] (at1) {$a_2$};
+    \node[above=0.5cm of st1, visible on=<2->] (rt1) {$\widehat{r_2}$};
+    
+    \draw[imagline, color=myblue, visible on=<2->] (st) -- (tr1.north);
+    \draw[imagline, color=myblue, visible on=<2->] (st) -- (tr2.north);
+    \draw[imagline, color=myred, visible on=<2->] (at) -- (st);
+    \draw[imagline, color=myred, visible on=<2->] (at1) -- (st1);
+    \draw[imagline, color=myygreen, visible on=<2->] (st) -- (st1);
+    
+    \draw[imagline, -{Latex[length=3mm]}, color=myyellow, visible on=<2->] (st) -- (rt);
+    \draw[imagline, -{Latex[length=3mm]}, color=myyellow, visible on=<2->] (st1) -- (rt1);
+    \node[below right=3.2cm and -1.2cm of st, visible on=<2->] (wm) {Тренировка модели мира};
+    
+    
+    % right part
+    \node[state, minimum size=1cm, right=8cm of st, visible on=<3->] (st_p) {};
+    \node[trap, below left=0.6cm and 0.1cm of st_p, visible on=<3->] (tr1_p) {};
+    
+    \node[above left=0.4cm and 0.3cm of st_p, visible on=<3->] (at_p) {$a_1$};
+    \node[above=0.5cm of st_p, visible on=<3->] (rt_p) {$\widehat{r_1}$};
+    
+    \node[below=-0.15cm of tr1_p, visible on=<3->] (o1_p) {\includegraphics[width=1.1cm, visible on=<4->]{images/utils/o1_wm_tr.png}};
+    \node[below=-0.05cm of o1_p, visible on=<3->] (o1_pp) {$o_1$};
+    
+    \node[state, minimum size=1cm, right=1.5cm of st_p, visible on=<3->] (st1_p) {};
+    \node[below left=0.5cm and 0.4cm of st1_p, visible on=<3->] (at1_p) {$a_2$};
+    \node[above=0.5cm of st1_p, visible on=<3->] (rt1_p) {$\widehat{r_2}$};
+    \node[state, minimum size=1cm, right=1.5cm of st1_p, visible on=<3->] (st2_p) {};
+    \node[below left=0.5cm and 0.4cm of st2_p, visible on=<3->] (at2_p) {$a_3$};
+    \node[above=0.5cm of st2_p, visible on=<3->] (rt2_p) {$\widehat{r_3}$};
+    % densely dotted
+    
+    \draw[imagline, color=myblue, visible on=<3->] (st_p) -- (tr1_p.north);
+    \draw[imagline, color=myred, visible on=<3->] (at_p) -- (st_p);
+    \draw[imagline, color=myred, loosely dotted, -{Latex[length=3mm]}, visible on=<3->] (st_p) -- (at1_p);
+    \draw[imagline, color=myred, visible on=<3->] (at1_p) -- (st1_p);
+    \draw[imagline, color=myygreen, visible on=<3->] (st_p) -- (st1_p);
+    
+    \draw[imagline, color=myred, loosely dotted, -{Latex[length=3mm]}, visible on=<3->] (st1_p) -- (at2_p);
+    \draw[imagline, color=myred, visible on=<3->] (at2_p) -- (st2_p);
+    \draw[imagline, color=myygreen, visible on=<3->] (st1_p) -- (st2_p);
+    
+    
+    \draw[imagline, -{Latex[length=3mm]}, color=myyellow, visible on=<3->] (st_p) -- (rt_p);
+    \draw[imagline, -{Latex[length=3mm]}, color=myyellow, visible on=<3->] (st1_p) -- (rt1_p);
+    \draw[imagline, -{Latex[length=3mm]}, color=myyellow, visible on=<3->] (st2_p) -- (rt2_p);
+    \node[below right=3.2cm and -0.2cm of st_p, visible on=<3->] (wm_p) {Тренировка стратегии в ``воображении''};
+    
+    
+    
+    % left part
+    \node[state, minimum size=1cm, left=9cm of st, visible on=<1->] (st_e) {};
+    \node[state, minimum size=1cm, right=1.0cm of st_e, visible on=<1->] (st1_e) {};
+    \node[state, minimum size=1cm, right=1.0cm of st1_e, visible on=<1->] (st2_e) {};
+    \draw[imagline, color=myygreen, visible on=<1->] (st1_e) -- (st2_e);
+    \draw[imagline, color=myygreen, visible on=<1->] (st_e) -- (st1_e);
+    
+    \node[above left=0.4cm and 0.3cm of st_e, visible on=<1->] (at_e) {$a_1$};
+    \draw[imagline, color=myred, visible on=<1->] (at_e) -- (st_e);
+    \node[above left=0.4cm and 0.3cm of st1_e, visible on=<1->] (at1_e) {$a_2$};
+    \draw[imagline, color=myred, visible on=<1->] (at1_e) -- (st1_e);
+    \node[above left=0.4cm and 0.3cm of st2_e, visible on=<1->] (at2_e) {$a_3$};
+    \draw[imagline, color=myred, visible on=<1->] (at2_e) -- (st2_e);
+    
+    
+    \node[trap, below left=0.6cm and 0.1cm of st_e, visible on=<1->] (tr1_e) {};
+    \draw[imagline, color=myblue, visible on=<1->] (st_e) -- (tr1_e.north);
+    \node[below=-0.15cm of tr1_e, visible on=<1->] (o1_e) {\includegraphics[width=1.1cm]{images/utils/o1_e.png}};
+    \node[below=-0.05cm of o1_e, visible on=<1->] (o1_ee) {$o_1$};
+    
+    \node[trap, below left=0.6cm and 0.1cm of st1_e, visible on=<1->] (tr2_e) {};
+    \draw[imagline, color=myblue, visible on=<1->] (st1_e) -- (tr2_e.north);
+    \node[below=-0.15cm of tr2_e, visible on=<1->] (o2_e) {\includegraphics[width=1.1cm]{images/utils/o2_e.png}};
+    \node[below=-0.05cm of o2_e, visible on=<1->] (o2_ee) {$o_2$};
+    
+    \node[trap, below left=0.6cm and 0.1cm of st2_e, visible on=<1->] (tr3_e) {};
+    \draw[imagline, color=myblue, visible on=<1->] (st2_e) -- (tr3_e.north);
+    \node[below=-0.15cm of tr3_e, visible on=<1->] (o3_e) {\includegraphics[width=1.1cm]{images/utils/o3_e.png}};
+    \node[below=-0.05cm of o3_e, visible on=<1->] (o3_ee) {$o_3$};
+    \node[below right=3.2cm and -0.2cm of st_e, visible on=<1->] (wm_e) {Сбор опыта};
+    
+    
+    % black arrows
+    \node[right=0.2cm of st2_e, visible on=<2->] (help1l) {};
+    \node[left=0.2cm of st, visible on=<2->] (help1r) {};
+    \draw[-triangle 45, line width=2mm,
+    postaction={draw=black, rounded corners, line width=0.35cm, shorten >=0.5cm, -}, visible on=<2->] (help1l) -- (help1r);
+    
+    \node[right=0.2cm of st1, visible on=<3->] (help2l) {};
+    \node[left=0.2cm of st_p, visible on=<3->] (help2r) {};
+    \draw[-triangle 45, line width=2mm,
+    postaction={draw=black, rounded corners, line width=0.35cm, shorten >=0.5cm, -}, visible on=<3->] (help2l) -- (help2r);
+    
+    \node[below=3.8cm of st1_e, visible on=<4->] (help3r) {};
+    \node[below=3.8cm of st1_p, visible on=<4->] (help3l) {};
+    
+    \node[below=1.2cm of help3r, visible on=<4->] (p2) {};
+    \node[below=1.2cm of help3l, visible on=<4->] (p1) {};
+    \draw[-triangle 45, line width=2mm, rounded corners, 
+    postaction={draw=black, line width=0.35cm, shorten >=0.5cm, -}, visible on=<4->] (help3l) -- (p1.north) -- (p2.south) -- (help3r.south);
+    
+    
+\end{tikzpicture}

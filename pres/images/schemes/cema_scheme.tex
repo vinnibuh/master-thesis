@@ -1,0 +1,41 @@
+\begin{tikzpicture}[scale=0.78]
+    \begin{scope}[yshift=8cm,node distance=2.5em and 1.5em]
+	\path [draw, fill={rgb:blue,1;white,3}, rounded corners] (-2.2,-0.9) rectangle (2.0,1.9) {};
+	\path [draw, fill={rgb:orange,1;white,3}, rounded corners] (-2.2,2.0) rectangle (2.0,5.0) {};
+	\node[] (rob_dyn) at (0.6,-0.7) {robot dynamics};
+	\node[] (obj_dyn) at (0.5,4.7) {object dynamics};
+    \node[mystyle, fill={rgb:white,1},            ] (st) {$s_t$};
+    \node[mystyle, fill={rgb:white,1}, above=of st] (ut) {$u_t$};
+    \node[mystyle, fill={rgb:white,1}, above=of ut] (sts) {$s'_t$};
+    \node[mystyle, fill={rgb:white,1}, left=of sts] (stsm1) {$s'_{t-1}$};
+    \node[right=of sts] (stsp1) {};
+    \node[mystyle, fill={rgb:black,1;white,3}, below right=1.6em and 1.6em of sts] (ots) {$o'_t$};
+    \node[mystyle, fill={rgb:black,1;white,3}, above left=1.2em and 0.0em of ut] (rt) {$r_t$};
+    \node[mystyle, fill={rgb:black,1;white,3}, above left=0.0em and 2.6em of ut] (c) {$c$};
+    \node[mystyle, fill={rgb:white,1}, left=of st] (stm1) {$s_{t-1}$};
+    \node[mystyle, fill={rgb:white,1}, above left=1.6em and 1.6em of st] (atm1) {$a_{t-1}$};
+    \node[mystyle, fill={rgb:black,1;white,3}, above right=1.6em and 1.6em of st] (ot) {$o_t$};
+    % \node[mystyle, fill={rgb:black,1;brown,3}, above left=0.9em and 0.1em of ut] (u1t) {$u_t$};
+    \node[right=of st] (stp1) {};
+    \draw[myline] (stsm1) -- (sts);
+	\draw[myline] (sts) -- (stsp1);
+	\draw[myline] (sts) -- (ots);
+	\draw[myline] (st) -- (ut);
+	\draw[myline] (ut) -- (sts);
+	\draw[myline] (stm1) -- (st);
+	\draw[myline] (atm1) -- (st);
+	\draw[myline] (st) -- (ot);
+	\draw[myline] (c) -- (ut);
+	\draw[myline] (ut) -- (rt);
+	\draw[myline] (st) -- (stp1);
+	\draw[myline, dashed, color=blue] (ots) edge[bend right] (sts);
+% 	\draw[myline, color={rgb:brown,1;black,1}] (ots) edge[bend right=20, mysnake,] (ut);
+% 	\draw[myline, color={rgb:brown,1;black,1}] (st) edge[bend left=20, mysnake,] (ut);
+	\draw[myline, dashed, color={rgb:green,1;black,1}] (sts) edge[bend left] (ut);
+	\draw[myline, dashed, color={rgb:green,1;black,1}] (st) edge[bend right] (ut);
+	
+	\draw[myline, dashed, color={rgb:red,2;black,1}] (stm1) edge[bend left] (st);
+	\draw[myline, dashed, color={rgb:red,2;black,1}] (atm1) edge[bend left] (st);
+	\draw[myline, dashed, color={rgb:red,2;black,1}] (ot) edge[bend left] (st);
+	\end{scope}
+  \end{tikzpicture}

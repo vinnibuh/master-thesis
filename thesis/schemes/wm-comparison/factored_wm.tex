@@ -1,0 +1,42 @@
+\begin{tikzpicture}[scale=2.1]
+    \begin{scope}[yshift=8cm,node distance=3.5em and 5em]
+    \path [draw, fill={rgb:blue,1;white,3}, rounded corners] (-2.2,-1.8) rectangle (2.0,-0.05) {};
+    \path [draw, fill={rgb:orange,1;white,3}, rounded corners] (-2.2,0.05) rectangle (2.0,1.8) {};
+    
+    % influence part
+    \node[] (ut) {};
+    % \node[mystyle, fill={rgb:black,1;white,3}, above left=0.5em and 1.5em of ut] (c) {$c$};
+    % \node[below=6em of ut] {б)}
+    
+    % robot part
+	\node[] (rob_dyn) at (0.0,-1.6) {\LARGE манипулятор};
+    \node[bigstyle, fill={rgb:white,1}, below=of ut] (st) {\LARGE $s^r_t$};
+    \node[bigstyle, fill={rgb:white,1}, left=of st] (stm1) {\LARGE $s^r_{t-1}$};
+    \node[bigstyle, fill={rgb:white,1}, above left=1.1em and 2.0em of st] (atm1) {\LARGE $a_{t-1}$};
+    \node[bigstyle, fill={rgb:black,1;white,3}, above right=0.9em and 2.0em of st] (ot) {\LARGE $o^r_t$};
+    \node[right=of st] (stp1) {};
+	
+	% object part
+	\node[] (obj_dyn) at (0.0,1.6) {\LARGE объект};
+    \node[bigstyle, fill={rgb:white,1}, above=of ut] (sts) {\LARGE $s^o_t$};
+    \node[bigstyle, fill={rgb:white,1}, left=of sts] (stsm1) {\LARGE $s^o_{t-1}$};
+    \node[bigstyle, fill={rgb:black,1;white,3}, below right=0.9em and 2.0em of sts] (ots) {\LARGE $o^o_t$};
+    \node[right=of sts] (stsp1) {};
+    
+    % robot edges
+	\draw[bigline] (stm1) -- (st);
+	\draw[bigline] (st) -- (stp1);
+	\draw[bigline] (atm1) -- (st);
+	\draw[bigline] (st) -- (ot);
+	
+	% object edges
+% 	\draw[bigline] (st) -- (sts);
+    \draw[bigline] (stsm1) -- (sts);
+	\draw[bigline] (sts) -- (stsp1);
+	\draw[bigline] (sts) -- (ots);
+	
+	% inference edges
+% 	\draw[myline, dashed, color={rgb:green,1;black,1}] (sts) edge[bend left] (ut);
+% 	\draw[myline, dashed, color={rgb:green,1;black,1}] (ut) edge[bend right] (st);
+	\end{scope}
+  \end{tikzpicture}

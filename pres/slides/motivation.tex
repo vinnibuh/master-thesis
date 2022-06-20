@@ -1,0 +1,16 @@
+\setbeamercovered{transparent}
+\begin{frame}{Cause-Effect Modeling Agent}
+% TODO: make them appear and disappear as in slides
+\begin{itemize}
+    \item<1-> Structured World Model capable of OOD task generalisation in visual control tasks
+    \note[item]<1->{We want to present Cause-Effect Modeling Agent, in short CEMA, the Model-Based Reinforcement Learning Agent with Structured World Model, designed for solving Out-Of-Distribution tasks in visual control setting}
+    \item<2-> Learning causal invariance of a robot influencing changes of the object state
+    \note[item]<2->{CEMA is able to learn causality between changes in robot state and changes in object state.}
+    \item<3-> Latent state factorization into robot and object states given segmentation
+    \note[item]<3->{World Model takes as input segmented images of environment and its latent state is factored into robot and object states.}
+    \item<4-> Different dynamics models of robot and object with influence vector as link
+    \note[item]<4->{Both actor and object have their own dynamics connected via influence vector}
+\end{itemize}
+    
+\end{frame}
+\setbeamercovered{invisible}

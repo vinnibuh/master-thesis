@@ -1,0 +1,74 @@
+\begin{tikzpicture}[scale=2.1]
+    \begin{scope}[yshift=8cm,node distance=9.3em and 5em]
+	
+	% Robot dynamics
+	\path [draw, fill={rgb:blue,1;white,3}, rounded corners, visible on=<2-10>] (-2.2,-1.1) rectangle (2.0,1.9) {};
+	\node[visible on=<2-10>] (rob_dyn) at (1.1,-0.9) {\LARGE Динамика робота};
+    \node[mystyle, fill={rgb:white,1}, left=5 em of st, visible on=<2-10>] (stm1) {\LARGE $s_{t-1}$};
+    \node[mystyle, fill={rgb:white,1}, visible on=<2-10>] (st) {\LARGE $s_t$};
+    \node[right=of st, visible on=<2-10>] (stp1) {};
+    \node[mystyle, fill={rgb:white,1}, above left=4em and 3em of st, visible on=<2-10>] (atm1) {\LARGE $a_{t-1}$};
+    \node[mystyle, fill={rgb:black,1;white,3}, above right=4em and 3em of st, visible on=<2-9>] (ot) {\LARGE $o_t$};
+    
+    % Object dynamics
+	\path [draw, fill={rgb:orange,1;white,3}, rounded corners, visible on=<2-10>] (-2.2,2.0) rectangle (2.0,5.0) {};
+	\node[visible on=<2-10>] (obj_dyn) at (1.1,4.7) {\LARGE Динамика объекта};
+    \node[mystyle, fill={rgb:white,1}, above=of st, visible on=<4-10>] (ut) {\LARGE $u_t$};
+    \node[mystyle, fill={rgb:white,1}, above=of ut, visible on=<5-10>] (sts) {\LARGE $s'_t$};
+    \node[mystyle, fill={rgb:white,1}, left=of sts, visible on=<5-10>] (stsm1) {\LARGE $s'_{t-1}$};
+    \node[right=of sts, visible on=<5-10>] (stsp1) {};
+    \node[mystyle, fill={rgb:black,1;white,3}, below right=3.9em and 3em of sts, visible on=<5-9>] (ots) {\LARGE $o'_t$};
+    
+    % Reward
+    \node[mystyle, fill={rgb:black,1;white,3}, above left=3.9em and 3em of ut, visible on=<6-9>] (rt) {\LARGE $r_t$};
+    
+    % Value
+    \node[mystyle, fill={rgb:white,1}, below right=4em and 3em of sts, visible on=<10>] (v) {\LARGE $v$};
+    
+    % robot imagination
+	\draw[myline, visible on=<2-10>] (stm1) -- (st);
+	\draw[myline, visible on=<2-10>] (st) -- (stp1);
+	\draw[myline, visible on=<2-10>] (atm1) -- (st);
+	\draw[myline, visible on=<2-9>] (st) -- (ot);
+	
+	% Influence imagination
+	\draw[myline, visible on=<4-10>] (st) -- (ut);
+	
+	% Object imagination
+	\draw[myline, visible on=<5-10>] (ut) -- (sts);
+    \draw[myline, visible on=<5-10>] (stsm1) -- (sts);
+	\draw[myline, visible on=<5-10>] (sts) -- (stsp1);
+	\draw[myline, visible on=<5-9>] (sts) -- (ots);
+	
+	% Reward prediction
+	\draw[myline, visible on=<6-9>] (ut) -- (rt);
+	
+	% Value prediction
+	\draw[myline, visible on=<10>] (sts) -- (v);
+    \draw[myline, visible on=<10>] (ut) -- (v);
+    \draw[myline, visible on=<10>] (st) -- (v);
+	
+	% Robot inference
+	\draw[myline, dashed, color={rgb:red,2;black,1}, visible on=<3-9>] (ot) edge[bend left] (st);
+	\draw[myline, dashed, color={rgb:red,2;black,1}, visible on=<3-9>] (stm1) edge[bend left] (st);
+	
+	% Object inference
+	\draw[myline, dashed, color=blue, visible on=<4-9>] (ots) edge[bend right] (sts);
+	
+	% Influence inference
+	\draw[myline, dashed, color=blue, visible on=<4-9>] (sts) edge[bend left] (ut);
+	\draw[myline, dashed, color={rgb:red,2;black,1}, visible on=<9>] (st) edge[bend right] (ut);
+	\end{scope}
+	
+	% Straight value grad
+	\draw[myline, color={rgb:green,1;black,1}, visible on=<10>] (v) edge[bend right=20, mysnake,] (sts);
+	\draw[myline, color={rgb:green,1;black,1}, visible on=<10>] (v) edge[bend right=20, mysnake] (ut);
+	\draw[myline, color={rgb:green,1;black,1}, visible on=<10>] (v) edge[bend left=20, mysnake] (st);
+	
+	% Top-down value grad
+	\draw[myline, color={rgb:green,1;black,1}, visible on=<10>] (sts) edge[bend right=20, mysnake] (ut);
+	\draw[myline, color={rgb:green,1;black,1}, visible on=<10>] (ut) edge[bend right=20, mysnake] (st);
+	
+	% Action value grad
+	\draw[myline, color={rgb:green,1;black,1}, visible on=<10>] (st) edge[bend left=20, mysnake] (atm1);
+\end{tikzpicture}

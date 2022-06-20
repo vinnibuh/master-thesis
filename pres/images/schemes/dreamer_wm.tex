@@ -1,0 +1,21 @@
+\begin{tikzpicture}[scale=2.1]
+    \begin{scope}[yshift=8cm,node distance=5em and 5em]
+	\path [draw, fill={rgb:red,1;white,3}, rounded corners] (-2.2,-1.5) rectangle (2.0,1.5) {};
+	\node[] (rob_dyn) at (-1.0,-1.3) {\LARGE Динамика среды};
+    \node[mystyle, fill={rgb:white,1},            ] (st) {\LARGE $s_t$};
+    \node[mystyle, fill={rgb:white,1}, left=of st] (stm1) {\LARGE $s_{t-1}$};
+    \node[right=of st] (stp1) {};
+    \node[mystyle, fill={rgb:white,1}, above left=4em and 3em of st] (atm1) {\LARGE $a_{t-1}$};
+    \node[mystyle, fill={rgb:black,1;white,3}, above right=4em and 3em of st] (ot) {\LARGE $o_t$};
+    \node[mystyle, fill={rgb:black,1;white,3}, below right=4em and 3em of st] (rt) {\LARGE $r_t$};
+    
+    \draw[myline] (stm1) -- (st);
+	\draw[myline] (atm1) -- (st);
+	\draw[myline] (st) -- (ot);
+	\draw[myline] (st) -- (rt);
+	\draw[myline] (st) -- (stp1);
+	
+	\draw[myline, dashed, color={rgb:red,2;black,1}] (stm1) edge[bend left] (st);
+	\draw[myline, dashed, color={rgb:red,2;black,1}] (ot) edge[bend left] (st);
+	\end{scope}
+\end{tikzpicture}

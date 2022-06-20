@@ -1,0 +1,112 @@
+% Auriga theme
+% find the most up-to-date version here: https://github.com/anishathalye/auriga
+
+% \documentclass[14pt,aspectratio=169]{beamer}
+\documentclass[9pt]{beamer}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usetheme{auriga}
+\usecolortheme{auriga}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{wrapfig}
+
+\usepackage{tikz}
+\usetikzlibrary{arrows,arrows.meta,shapes, decorations.pathmorphing,decorations.markings,backgrounds,calc,positioning}
+\usetikzlibrary{overlay-beamer-styles}
+
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.14}
+
+\usepackage{amssymb,amsfonts,amsmath,mathtext}
+\usepackage{color,enumerate,float,indentfirst}
+\usepackage{caption, subcaption}
+% \usepackage{environ}
+\usepackage{tcolorbox}
+\usepackage{geometry}
+\usepackage{pdfpages}
+
+\usepackage{biblatex}
+\addbibresource{refs.bib}
+
+\usepackage[symbol]{footmisc}
+
+% for notes
+% \setbeamertemplate{note page}{\pagecolor{yellow!5}\insertnote}
+% \setbeameroption{show notes on second screen=right}
+
+% \usetikzlibrary{shadows}
+\usepackage{soul}
+\usepackage{lipsum}
+
+% \usefonttheme{professionalfonts}
+
+\newtheorem{ttheorem}{Теорема}
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+
+\setbeamercolor{footline}{fg=blue}
+
+% define some colors for a consistent theme across slides
+\definecolor{red}{RGB}{181, 23, 0}
+\definecolor{blue}{RGB}{0, 118, 186}
+\definecolor{gray}{RGB}{146, 146, 146}
+
+% some tikz parameters
+\tikzset{
+mystyle/.style={
+  circle,
+  line width=1pt,
+  inner sep=0pt,
+  text width=3.5em,
+  align=center,
+  draw=black,
+  }
+}
+\tikzset{
+myline/.style={
+  line width=0.7pt,
+  -{Latex[length=3mm]}
+  }
+}
+\tikzset{
+mysnake/.style={
+  decoration={snake, pre length=0.01mm, segment length=2mm, amplitude=0.3mm, post length=3mm},
+  decorate
+  }
+}
+
+\newcommand{\itemi}{\item[\checkmark]}
+
+\begin{document}
+
+\input{slides/title_page}
+
+% \input{slides/motivation}
+\input{slides/problem_setup}
+\input{slides/oc_learning}
+\input{slides/oc_comparison}
+\input{slides/oorl_application}
+\input{slides/base_algo}
+% \input{slides/related_work}
+\input{slides/cema_wm}
+% \input{slides/model_variations}
+\input{slides/training_process}
+\input{slides/rotated_drawer}
+\input{slides/performance}
+\input{slides/mi_plot}
+\input{slides/causal_world}
+\input{slides/cw_results}
+\input{slides/publications}
+\input{slides/contacts}
+% TODO: make references correct
+% \input{slides/bibliography}
+
+% \input{example_slides/bullets}
+% \input{example_slides/split}
+% \input{example_slides/figure}
+% \input{example_slides/centered}
+% \input{example_slides/monospace}
+% \input{example_slides/brackets}
+% \input{example_slides/link}
+
+\end{document}

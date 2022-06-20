@@ -1,0 +1,12 @@
+\begin{frame}
+\frametitle{Тренировочный процесс}
+
+\begin{figure}
+    \centering
+    \resizebox{.9\linewidth}{!}{\input{images/schemes/imag_scheme}}
+\end{figure}
+\note[item]<1->{The training process of CEMA is the same as in Dreamer. First, the agent collects experience, interacting with the environment.}
+\note[item]<2->{Then, this experience is used to perform self-supervised training of World Model.}
+\note[item]<3->{Finally, using the World Model, the actor-critic policy is learned on imagined trajectories.}
+\note[item]<4->{The process is repeated and all three steps can be performed in parallel.}
+\end{frame}

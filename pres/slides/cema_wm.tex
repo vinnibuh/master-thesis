@@ -1,0 +1,86 @@
+\begin{frame}
+\frametitle{Модель мира CEMA}
+% TODO: titles are hanging out of images
+% TODO: maybe draw commentaries
+% TODO: draw an arrow
+
+\begin{columns}[b]
+\begin{column}{0.48\linewidth}
+\only<1-2>{
+    Модель мира Dreamer\cite{Dreamer}:
+    \vspace{0.45cm}
+    
+    \footnotesize{
+    \begin{itemize}
+    \setlength\itemsep{1ex}
+    \setlength\topsep{1.5ex}
+        \item $s_t \sim p(s_t \mid s_{t-1}, a_{t-1})$ модель динамики среды
+        \item $s_t \sim q(s_t \mid s_{t-1}, a_{t-1}, o_t)$ модель вывода
+        \item $p(o_t \mid s_t)$ модель изображения
+        \item $p(r_t \mid s_t)$ модель награды
+    \end{itemize} }
+    \vspace{0.4cm}
+    
+    \begin{figure}
+        \resizebox{.9\linewidth}{!}{\input{images/schemes/dreamer_wm}}
+    \end{figure}
+}
+\only<3->{
+    Части модели мира:
+    
+    \vspace{0.5cm}
+    \footnotesize{\textbf{Генеративная} модель прямой причинности:}
+    \scriptsize{
+    \begin{itemize}
+    \setlength\itemsep{1ex}
+    \setlength\topsep{1.5ex}
+        \item<3-> $s_t \sim p(s_t \mid s_{t-1}, a_{t-1})$ модель динамики скрытых состояний
+        \item<4-> $u_t \sim p(u_t \mid s_t, c)$ модель прямой причинности
+        \item<5-> $s'_t \sim p(s'_t\mid s'_{t-1}, u_t)$ модель обновления 
+    \end{itemize} }
+    \vspace{0.4cm}
+    \footnotesize{Обратная причинная модель (\textbf{модель вывода})}:
+    \scriptsize{
+    \begin{itemize}
+    \setlength\itemsep{1ex}
+    \setlength\topsep{1.5ex}
+        \item<3-> $s_t \sim q(s_t \mid s_{t-1}, a_{t-1}, o_t)$ модель вывода состояния робота 
+        \item<8-> $s'_t \sim q(s'_t \mid o'_t)$ модель вывода объектного состояния
+        \item<9-> $u_t \sim q(u_t \mid s_t, s'_t)$ модель обратной причинности
+    \end{itemize} }
+    \vspace{0.4cm}
+    \footnotesize{Выходы нейронной сети}:
+    \scriptsize{
+    \begin{itemize}
+    \setlength\itemsep{1ex}
+    \setlength\topsep{1.5ex}
+        \item<3-> $p(o_t \mid s_t)$ субъектный декодер 
+        \item<5-> $p(o'_t \mid s'_t)$ объектный декодер
+        \item<6-> $p(r_t \mid u_t)$ декодер награды
+        \item<10->$\pi(a_t \mid s_t, c)$, $v(s_{t}, u_{t}, s'_{t})$ стратегия и функция полезности
+    \end{itemize} }
+    \vspace{0.1cm}
+}
+\end{column}
+
+\begin{column}{0.48\linewidth}
+\only<2-10>{
+    Модель мира CEMA:
+    \begin{figure}
+        \resizebox{.9\linewidth}{!}{\input{images/schemes/cema_wm}}
+    \end{figure}
+}
+\end{column}
+\end{columns}
+
+\note[item]<1->{Let's take a look at RSSM World Model used in Dreamer. It has a single dynamics model and a single latent state, representing the state of the whole environment.}
+\note[item]<2->{In CEMA, we split dynamics model on two parts: robot dynamics and object dynamics.}
+\note[item]<3->{For robot dynamics, we left the RSSM without any changes, since the robot state is controlled directly by actions.}
+\note[item]<4->{From imagined robot latent state, we predict the task-specific influence vector, which represents the collateral object control performed by robot.}
+\note[item]<5->{The next object state is predicted using RSSM and the imagined influence vector.}
+\note[item]<6->{The influence vector is also used to predict step reward.}
+\note[item]<7->{The inference model of actor remains unchanged to Dreamer, specifically, the robot state is inferred from its previous state and current robot observation.}
+\note[item]<8->{Object latent state, on contrary, is inferred from the object image alone.}
+\note[item]<9->{For influence vector, posterior distribution is conditioned on both object and actor latent states to reflect the changes made to object by actor.}
+\note[item]<10->{Value function is conditioned on all latent states, while policy is conditioned only on robot state and low-dimensional task context vector.}
+\end{frame}

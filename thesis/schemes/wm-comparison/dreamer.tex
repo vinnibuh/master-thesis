@@ -1,0 +1,22 @@
+\begin{tikzpicture}[scale=2.1]
+    \begin{scope}[yshift=8cm,node distance=5em and 5em]
+	\path [draw, fill={rgb:red,1;white,3}, rounded corners] (-2.2,-1.8) rectangle (2.0,1.8) {};
+	\node[] (rob_dyn) at (-1.0,-1.6) {\LARGE среда};
+    \node[bigstyle, fill={rgb:white,1},            ] (st) {\LARGE $s_t$};
+    \node[bigstyle, fill={rgb:white,1}, left=of st] (stm1) {\LARGE $s_{t-1}$};
+    \node[right=of st] (stp1) {};
+    \node[bigstyle, fill={rgb:white,1}, above left=4em and 3em of st] (atm1) {\LARGE $a_{t-1}$};
+    \node[bigstyle, fill={rgb:black,1;white,3}, above right=4em and 3em of st] (ot) {\LARGE $o_t$};
+    \node[bigstyle, fill={rgb:black,1;white,3}, below right=4em and 3em of st] (rt) {\LARGE $r_t$};
+    % \node[below=6em of st] {a)}
+    
+    \draw[bigline] (stm1) -- (st);
+	\draw[bigline] (atm1) -- (st);
+	\draw[bigline] (st) -- (ot);
+	\draw[bigline] (st) -- (rt);
+	\draw[bigline] (st) -- (stp1);
+	
+% 	\draw[bigline, dashed, color={rgb:red,2;black,1}] (stm1) edge[bend left] (st);
+% 	\draw[bigline, dashed, color={rgb:red,2;black,1}] (ot) edge[bend left] (st);
+	\end{scope}
+\end{tikzpicture}
